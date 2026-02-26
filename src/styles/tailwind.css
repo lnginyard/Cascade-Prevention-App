@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	.neon-panel {
+		box-shadow: 0 0 10px color-mix(in srgb, theme('colors.neon') 25%, transparent);
+	}
+
+	.neon-grid-bg {
+		background-image:
+			linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+			linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+		background-size: 24px 24px;
+	}
+
+	.cascade-line {
+		stroke-dasharray: 8 12;
+		animation: cascadeFlow 2.2s linear infinite;
+	}
+
+	.neon-pulse {
+		animation: neonPulse 2.4s ease-in-out infinite;
+	}
+
+	.globe-spin {
+		transform-origin: 500px 300px;
+		animation: globeSpin 9s linear infinite;
+		stroke-dasharray: 18 10;
+	}
+
+	.broadcast-ring {
+		transform-origin: 500px 300px;
+		animation: broadcastRing 3.2s ease-out infinite;
+	}
+
+	.scan-sweep {
+		transform-origin: 500px 300px;
+		animation: scanSweep 4.6s linear infinite;
+	}
+
+	.orbit-drift-a {
+		transform-origin: 500px 300px;
+		animation: orbitDriftA 9.5s linear infinite;
+		stroke-dasharray: 10 7;
+	}
+
+	.orbit-drift-b {
+		transform-origin: 500px 300px;
+		animation: orbitDriftB 12s linear infinite;
+		stroke-dasharray: 7 11;
+	}
+
+	.beacon-pulse {
+		animation: beaconPulse 2.2s ease-in-out infinite;
+	}
+
+	.triangulate-line {
+		stroke-dasharray: 5 6;
+		animation: triangulateFlow 2.8s linear infinite;
+	}
+}
+
+@keyframes cascadeFlow {
+	from {
+		stroke-dashoffset: 42;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes neonPulse {
+	0%,
+	100% {
+		opacity: 0.65;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+@keyframes globeSpin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes broadcastRing {
+	0% {
+		opacity: 0.65;
+		transform: scale(0.98);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(1.06);
+	}
+}
+
+@keyframes scanSweep {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes orbitDriftA {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes orbitDriftB {
+	from {
+		transform: rotate(360deg);
+	}
+	to {
+		transform: rotate(0deg);
+	}
+}
+
+@keyframes beaconPulse {
+	0%,
+	100% {
+		opacity: 0.35;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+@keyframes triangulateFlow {
+	from {
+		stroke-dashoffset: 22;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}

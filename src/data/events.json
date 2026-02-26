@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ev_hurricane_gulf_cat4",
+    "name": "Category 4 Hurricane (Gulf)",
+    "type": "External",
+    "description": "Hurricane forming in Gulf of Mexico and disrupting logistics lanes"
+  },
+  {
+    "id": "ev_wildfire_ca",
+    "name": "California Wildfire",
+    "type": "External",
+    "description": "Widespread wildfire in California regions causing road and utility disruptions"
+  },
+  {
+    "id": "ev_aws_outage",
+    "name": "AWS us-east-1 Outage",
+    "type": "External",
+    "description": "Major cloud region outage impacting production systems"
+  },
+  {
+    "id": "ev_supplier_bankruptcy",
+    "name": "Tier-1 Supplier Bankruptcy",
+    "type": "External",
+    "description": "Primary supplier insolvency causes prolonged material shortages"
+  },
+  {
+    "id": "ev_geopolitical_sanctions",
+    "name": "Geopolitical Sanctions Shift",
+    "type": "External",
+    "description": "New sanctions restrict cross-border transactions and fulfillment"
+  },
+  {
+    "id": "ev_port_strike",
+    "name": "Major Port Labor Strike",
+    "type": "External",
+    "description": "Port strike blocks inbound freight and increases lead times"
+  },
+  {
+    "id": "ev_ransomware_internal",
+    "name": "Internal Ransomware Incident",
+    "type": "Internal",
+    "description": "Corporate endpoint compromise escalates into business systems encryption"
+  },
+  {
+    "id": "ev_erp_data_corruption",
+    "name": "ERP Data Corruption",
+    "type": "Internal",
+    "description": "Order, billing, and inventory records become inconsistent after faulty release"
+  },
+  {
+    "id": "ev_insider_privilege_abuse",
+    "name": "Insider Privilege Abuse",
+    "type": "Internal",
+    "description": "Privileged account misuse causes unauthorized configuration changes"
+  },
+  {
+    "id": "ev_dc_power_failure",
+    "name": "Primary Data Center Power Failure",
+    "type": "Internal",
+    "description": "On-prem power disruption reduces availability of critical services"
+  },
+  {
+    "id": "ev_key_personnel_loss",
+    "name": "Key Personnel Attrition Spike",
+    "type": "Internal",
+    "description": "Unexpected attrition in operations and platform teams delays incident response"
+  },
+  {
+    "id": "ev_change_release_regression",
+    "name": "Production Release Regression",
+    "type": "Internal",
+    "description": "High-risk release introduces performance failures and downstream instability"
+  }
+]
