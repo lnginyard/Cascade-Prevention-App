@@ -1,6 +1,6 @@
 import React from 'react';
 import EventControlPanel from './data/components/EventControlPanel.jsx';
-import CascadeVisualization from './data/components/CascadeVisualization.jsx';
+import CascadeVisualization from './data/components/CAscadeVisualization.jsx';
 import SimulationFooterControls from './data/components/SimulationFooterControls.jsx';
 import AIRiskPanel from './data/components/AIRiskPanel.jsx';
 import ExposureGraph from './data/components/ExposureGraph.jsx';
