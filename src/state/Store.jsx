@@ -218,6 +218,34 @@ export function StoreProvider({ children }) {
 
         if (!mounted) return;
         dispatch({ type: actionTypes.LOAD_SCENARIO_SUCCESS, payload: scenario });
+
+        // Publish a lightweight signature to the central Signatures API (non-blocking)
+        (async () => {
+          try {
+            const apiUrl = (typeof import !== 'undefined' && import.meta && import.meta.env && import.meta.env.VITE_API_URL) || process.env.SIGNATURES_API_URL || process.env.VITE_API_URL
+            if (!apiUrl) return
+
+            const signature = {
+              signatureId: `sim-${Date.now()}-${Math.random().toString(36).slice(2,6)}`,
+              originServiceId: 'simulator-ui',
+              detectedAt: Date.now(),
+              eventId: state.eventId,
+              confidenceScore: scenario.riskSummary?.confidence ?? null,
+              severity: scenario.riskSummary?.cascadeSeverity ?? null,
+              summary: scenario.riskSummary || {},
+            }
+
+            await fetch(apiUrl.replace(/\/$/, '') + '/signatures', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(signature),
+            })
+          } catch (e) {
+            // ignore - non-blocking publishing for demo
+            // eslint-disable-next-line no-console
+            console.warn('Simulator: publish signature failed', e)
+          }
+        })()
       } catch (scenarioError) {
         if (!mounted) return;
         dispatch({
