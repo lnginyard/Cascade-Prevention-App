@@ -222,7 +222,14 @@ export function StoreProvider({ children }) {
         // Publish a lightweight signature to the central Signatures API (non-blocking)
         (async () => {
           try {
-            const apiUrl = (typeof import !== 'undefined' && import.meta && import.meta.env && import.meta.env.VITE_API_URL) || process.env.SIGNATURES_API_URL || process.env.VITE_API_URL
+            let apiUrl = process.env.SIGNATURES_API_URL || process.env.VITE_API_URL
+            try {
+              if (import.meta && import.meta.env && import.meta.env.VITE_API_URL) {
+                apiUrl = apiUrl || import.meta.env.VITE_API_URL
+              }
+            } catch (err) {
+              // import.meta may not be available in some runtimes; ignore
+            }
             if (!apiUrl) return
 
             const signature = {
