@@ -1,5 +1,5 @@
 import React from 'react';
-import { actionTypes, ALL_INDUSTRIES, ALL_REGIONS, useStore, useStoreDispatch } from '../../state/Store.jsx';
+import { actionTypes, ALL_INDUSTRIES, ALL_REGIONS, REGION_DISPLAY_NAMES, useStore, useStoreDispatch } from '../../state/Store.jsx';
 
 export default function SimulationFooterControls() {
   const dispatch = useStoreDispatch();
@@ -44,11 +44,14 @@ export default function SimulationFooterControls() {
             <label key={region} className="flex items-center gap-2 text-sm rounded border border-gray-700 bg-gray-900/70 px-2 py-1.5">
               <input
                 type="checkbox"
-                aria-label={`Toggle AWS region ${region}`}
+                aria-label={`Toggle AWS region ${REGION_DISPLAY_NAMES[region] || region}`}
                 checked={selectedRegions.includes(region)}
                 onChange={() => dispatch({ type: actionTypes.TOGGLE_REGION, payload: region })}
               />
-              {region}
+              <span className="leading-tight">
+                <span className="block text-gray-100">{REGION_DISPLAY_NAMES[region] || region}</span>
+                <span className="block text-[10px] text-gray-400">{region}</span>
+              </span>
             </label>
           ))}
         </div>

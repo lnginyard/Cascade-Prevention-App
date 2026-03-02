@@ -6,18 +6,46 @@ import AIRiskPanel from './data/components/AIRiskPanel.jsx';
 import ExposureGraph from './data/components/ExposureGraph.jsx';
 import EventLogPanel from './data/components/EventLogPanel.jsx';
 import { StoreProvider } from './state/Store.jsx';
-import logo from './assets/cascade-logo.svg';
+import appLogo from './assets/Blue Abstract Circle Global Tech Logo.mp4';
 
 function App() {
+  const [heroStyle, setHeroStyle] = React.useState('neon');
+
   return (
     <StoreProvider>
       <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 text-white">
         <div className="mx-auto w-full max-w-[1520px] px-3 sm:px-5 py-4 sm:py-6 space-y-5">
-          <header className="rounded-xl border border-gray-700/80 bg-gray-800/40 px-4 sm:px-6 py-4 sm:py-5 neon-panel">
-            <div className="flex flex-col items-center text-center gap-2">
-              <img src={logo} alt="Cascade Prevention Engine logo" className="h-12 w-12 sm:h-14 sm:w-14" />
-              <h1 className="text-xl sm:text-3xl font-semibold tracking-wide">Cascade Prevention Engine Dashboard</h1>
-              <p className="text-xs sm:text-sm text-gray-300 max-w-3xl">
+          <header className={`rounded-xl px-4 sm:px-6 py-4 sm:py-5 neon-panel overflow-hidden relative ${heroStyle === 'ops' ? 'hero-variant-ops' : 'hero-variant-neon'}`}>
+            <div className="header-scanline" aria-hidden="true" />
+            <div className="absolute right-3 top-3 z-20 flex items-center gap-1 rounded border border-slate-600 bg-slate-900/75 p-1 text-[10px]">
+              <button
+                type="button"
+                onClick={() => setHeroStyle('ops')}
+                className={`rounded px-2 py-1 transition ${heroStyle === 'ops' ? 'bg-amber-500/25 text-amber-200' : 'text-slate-300 hover:text-white'}`}
+              >
+                Ops
+              </button>
+              <button
+                type="button"
+                onClick={() => setHeroStyle('neon')}
+                className={`rounded px-2 py-1 transition ${heroStyle === 'neon' ? 'bg-cyan-500/25 text-cyan-200' : 'text-slate-300 hover:text-white'}`}
+              >
+                Neon
+              </button>
+            </div>
+            <div className="flex flex-col items-center text-center gap-2 relative z-10">
+              <div className={`hero-logo-wrap ${heroStyle === 'ops' ? 'hero-logo-ops' : 'hero-logo-neon'}`}>
+                <video
+                  src={appLogo}
+                  className="hero-logo-image"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label="Cascade Prevention Engine logo"
+                />
+              </div>
+              <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-gray-300 max-w-3xl">
                 Simulate disruptions, visualize global cascade impact, and review AI-guided mitigation signals in one continuous workflow.
               </p>
             </div>

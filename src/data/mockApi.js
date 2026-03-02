@@ -1,5 +1,8 @@
 import events from './events.json';
 
+const AWS_REGION_BASELINE_COUNT = 38;
+const INDUSTRY_BASELINE_COUNT = 18;
+
 const EVENT_PROFILES = {
   ev_hurricane_gulf_cat4: {
     severity: 'Major',
@@ -162,8 +165,8 @@ function withImpact(lines, intensity) {
 }
 
 function buildNodes(riskIndex, regions, industries) {
-  const regionalFactor = regions.length / 4;
-  const industryFactor = industries.length / 5;
+  const regionalFactor = regions.length / AWS_REGION_BASELINE_COUNT;
+  const industryFactor = industries.length / INDUSTRY_BASELINE_COUNT;
 
   return [
     {
@@ -194,8 +197,8 @@ export async function getScenario(eventId, filters) {
 
   const profile = EVENT_PROFILES[eventId] || EVENT_PROFILES.ev_hurricane_gulf_cat4;
   const base = scoreFromEvent(eventId);
-  const regionMultiplier = clamp(filters.selectedRegions.length / 4, 0.25, 1);
-  const industryMultiplier = clamp(filters.selectedIndustries.length / 5, 0.2, 1);
+  const regionMultiplier = clamp(filters.selectedRegions.length / AWS_REGION_BASELINE_COUNT, 0.25, 1);
+  const industryMultiplier = clamp(filters.selectedIndustries.length / INDUSTRY_BASELINE_COUNT, 0.2, 1);
   const failoverDiscount = filters.failoverEnabled ? 0.09 : 0;
   const runBoost = clamp(filters.simulationRuns * 0.03, 0, 0.12);
   const intensity = clamp(0.45 + regionMultiplier * 0.22 + industryMultiplier * 0.22 + runBoost - failoverDiscount, 0.25, 1);
