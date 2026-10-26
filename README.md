@@ -1,46 +1,94 @@
-# Cascade Prevention Engine Dashboard
+# Cascade Prevention Engine — Interactive Dashboard
 
-Interactive resilience simulation dashboard with a broadcast-style globe, event-driven cascade propagation, explainable AI risk analysis, full report exports, and demo presets.
+An interactive **simulation dashboard** for exploring disruption scenarios, visualizing cascading impact across regions, and reviewing explainability-style risk and mitigation signals.
 
-## Quickstart
+This is the companion presentation/demo for [AI-Cascade-Prevention-Engine](https://github.com/lnginyard/AI-Cascade-Prevention-Engine).
 
-- Requirements: Node.js 20+, npm 10+
-- Install: `npm ci`
-- Run dev: `npm run dev`
-- Build: `npm run build`
-- Preview build: `npm run preview`
+## Important scope note
 
-## Demo Script (for judges)
+The dashboard uses local demo/scenario data. It is intended to demonstrate a workflow and interface, not to claim live AWS telemetry ingestion or production incident prevention. Treat scenario outcomes and risk metrics as simulated unless a specific live integration is documented and verified.
 
-1. Open app and choose **AWS Outage Ripple** preset.
-2. Run simulation and drag/rotate the globe.
-3. Click region hotspots to zoom and inspect propagation.
-4. Toggle **Cross-region reroute** and run simulation again.
-5. Compare risk explainability, cost impact, and action alerts.
-6. Export artifacts: CSV, PDF, JSON, PNG, and incident playbook.
-7. Review observability log panel for timestamped user actions.
+## Highlights
 
-## What to look at
+- Globe-based cascade visualization and region hotspots
+- Scenario presets, including baseline and disruption examples
+- Failover/reroute controls for comparing simulation outcomes
+- Risk explanation and suggested mitigation panels
+- Event/observability log panel for user actions
+- Report export options documented by the application (CSV, PDF, JSON, PNG, and incident playbook)
+- Responsive React/Vite interface
+- Docker-based local run option
+- GitHub Actions workflow configured to install dependencies and run a production build
 
-- **State + Data flow**: centralized reducer store (`src/state/Store.jsx`) with local data hook (`src/hooks/useData.js`).
-- **Scenarios**: calm baseline, hurricane impact, AWS outage ripple.
-- **Resilience controls**: failover toggle alters cascade intensity and risk metrics.
-- **Explainability**: AI panel shows why risk changed and suggested mitigations.
-- **Exportability**: full-report exports (not graph-only) for reproducible review.
+## Technology
 
-## Reproducible Demo Harness
+- React
+- Vite
+- JavaScript / JSX
+- Tailwind CSS
+- D3 geographic utilities and TopoJSON/world-atlas data
+- Docker / Docker Compose
+- GitHub Actions
 
-- Scripted run: `bash scripts/demo.sh`
-- Docker:
-  - Build + run with compose: `docker compose up --build`
-  - Open: `http://localhost:4173`
+## Run locally
 
-## CI
+Requirements: Node.js 20+ and npm 10+.
 
-- GitHub Actions workflow runs `npm ci` and `npm run build` on pushes/PRs.
+```bash
+npm ci
+npm run dev
+```
 
-## Security notes
+Vite prints the local development URL in the terminal.
 
-- App uses local JSON demo data and does not require secrets.
-- Do not commit `.env` files or hardcode credentials.
-- For production, fetch event data from secure services (e.g., API Gateway/S3) with IAM-backed access.
+Build and preview the production bundle:
+
+```bash
+npm run build
+npm run preview
+```
+
+Run the scripted demo:
+
+```bash
+bash scripts/demo.sh
+```
+
+Run with Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+Then open `http://localhost:4173` if that is the port published by the current Compose configuration.
+
+## Suggested demo walkthrough
+
+1. Choose a scenario preset such as **AWS Outage Ripple**.
+2. Run the simulation and inspect the globe and affected regions.
+3. Toggle the cross-region reroute/failover control and run the scenario again.
+4. Compare the risk explanation and mitigation suggestions.
+5. Export the report artifacts and inspect the event log.
+
+Feature availability should be verified against the current branch before presenting this walkthrough.
+
+## Project structure
+
+- `src/App.jsx` — application layout and major dashboard panels
+- `src/state/Store.jsx` — shared state and simulation workflow
+- `src/hooks/useData.js` — local data hook
+- `src/data/` — scenario data and UI components
+- `scripts/demo.sh` — scripted demo helper
+- `.github/workflows/ci.yml` — dependency installation and build workflow
+
+## Relationship to AICPE
+
+The dashboard illustrates the user-facing simulation and decision-support experience. The separate engine repository contains the AWS/TypeScript infrastructure and handler foundations. The dashboard should not be described as proof that the engine is connected to live AWS telemetry unless that connection has been implemented and tested.
+
+## Before a production deployment
+
+- Replace or explicitly label all demo data.
+- Connect only through authenticated, least-privilege APIs.
+- Add end-to-end and accessibility tests.
+- Validate export contents, error states, and large-scenario performance.
+- Never commit credentials or `.env` files.
